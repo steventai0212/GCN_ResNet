@@ -15,6 +15,11 @@
 Sandberg et al. In our paper, we use a network to exrtact perceptual face features. This network model cannot be publicly released. As an alternative, we recommend using the Facenet from Sandberg et al. This repo uses the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with this model to ensure similar results.
 - [Resnet50-v1](https://github.com/tensorflow/models/blob/master/research/slim/README.md) pre-trained on ImageNet from Tensorflow Slim. We use the version resnet_v1_50_2016_08_28.tar.gz as an initialization of the face reconstruction network.
 - [68-facial-landmark detector](https://drive.google.com/file/d/1KYFeTb963jg0F47sTiwqDdhBIvRlUkPa/view?usp=sharing). We use 68 facial landmarks for loss calculation during training. To make the training process reproducible, we provide a lightweight detector that produce comparable results to [the method of Bulat et al.](https://github.com/1adrianb/2D-and-3D-face-alignment). The detector is trained on [300WLP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm), [LFW](http://vis-www.cs.umass.edu/lfw/), and [LS3D-W](https://www.adrianbulat.com/face-alignment).
+- install opendr. Download [opendir](https://github.com/polmorenoc/opendr), zip the opendr folder so that it will like opendr.zip.
+```
+# Run following command
+python -m pip install opendr.zip
+```
 
 ### Download requirements face model and pre-trained network ###
 
@@ -22,27 +27,7 @@ Sandberg et al. In our paper, we use a network to exrtact perceptual face featur
 
 2. Download the [pre-trained face net and reconstrucion net](https://drive.google.com/file/d/1hioKD4PTTaC9GgJM1Wg0W0ssG-MnIgz7/view?usp=sharing), unzip it and put into ./network subfolder.
 
-7. ./input subfolder contains several test images and ./output subfolder stores their reconstruction results. For each input test image, two output files can be obtained after running the demo code:
-	- "xxx.mat" : 
-		- cropped_img: an RGB image after alignment, which is the input to the R-Net
-		- recon_img: an RGBA reconstruction image aligned with the input image (only on Linux).
-		- coeff: output coefficients of R-Net.
-		- face_shape: vertex positions of 3D face in the world coordinate.
-		- face_texture: vertex texture of 3D face, which excludes lighting effect.
-		- face_color: vertex color of 3D face, which takes lighting into consideration.
-		- lm\_68p: 68 2D facial landmarks derived from the reconstructed 3D face. The landmarks are aligned with cropped_img.
-		- lm\_5p: 5 detected landmarks aligned with cropped_img. 
-	- "xxx_mesh.obj" : 3D face mesh in the world coordinate (best viewed in MeshLab).
-
-### Training requirements ###
-
-
-
-### Training preparation ###
-
-1. Download the [pre-trained weights](https://drive.google.com/file/d/0B5MzpY9kBtDVZ2RpVDYwWmxoSUk/edit) of Facenet provided by Sandberg et al., unzip it and put all files in ./weights/id_net.
-2. Download the [pre-trained weights](http://download.tensorflow.org/models/resnet_v1_50_2016_08_28.tar.gz) of Resnet_v1_50 provided by Tensorflow Slim, unzip it and put resnet_v1_50.ckpt in ./weights/resnet.
-3. Download the [68 landmark detector](https://drive.google.com/file/d/1KYFeTb963jg0F47sTiwqDdhBIvRlUkPa/view?usp=sharing), put the file in ./network.
+3. Download the [pre-trained network ResNet_v1 id_net](https://drive.google.com/file/d/10X1VG_2o9dC8QW9g-SZPuZr-lR7ao6Z4/view?usp=sharing), unzip it and put into ./weights subfolder.
 
 ### Data pre-processing ###
 1. To train our model with custom images，5 facial landmarks of each image are needed in advance for an image pre-alignment process. We recommend using [dlib](http://dlib.net/) or [MTCNN](https://github.com/ipazc/mtcnn). Use these public face detectors to get 5 landmarks, and save all images and corresponding landmarks in <raw_img_path>. Note that an image and its detected landmark file should have same name.
@@ -57,6 +42,11 @@ python preprocess_img.py --img_path <raw_img_path> --save_path <save_path_for_pr
 
 ```
 
+### Download pre-processing data celeba ###
+1. Download the pre-processing data for [training](https://drive.google.com/file/d/1ZD_fQzRhfBUholsR0TWa-KqarpYxe2o0/view?usp=sharing).
+
+2. Download the pre-processing data for[validation](https://drive.google.com/file/d/1s7M1IRoOl8a5ubSbXot-I3EOfkkUT2Uo/view?usp=sharing).
+
 ### Training networks ###
 1. Train the reconstruction network with the following command:
 ```
@@ -67,14 +57,27 @@ python train.py
 python train.py --data_path <custom_data_path> --val_data_path <custom_val_data_path> --model_name <custom_model_name>
 
 ```
-2. Monitoring the training process via tensorboard:
+2. View the training process via tensorboard:
 ```
-tensorboard --logdir=result/<custom_model_name> --port=10001
+tensorboard --logdir=result/<custom_model_name>
 ```
 3. Evaluating trained model:
+./input subfolder contains several test images and ./output subfolder stores their reconstruction results. For each input test image, two output files can be obtained after running the demo code:
+	- "xxx.mat" : 
+		- cropped_img: an RGB image after alignment, which is the input to the R-Net
+		- recon_img: an RGBA reconstruction image aligned with the input image (only on Linux).
+		- coeff: output coefficients of R-Net.
+		- face_shape: vertex positions of 3D face in the world coordinate.
+		- face_texture: vertex texture of 3D face, which excludes lighting effect.
+		- face_color: vertex color of 3D face, which takes lighting into consideration.
+		- lm\_68p: 68 2D facial landmarks derived from the reconstructed 3D face. The landmarks are aligned with cropped_img.
+		- lm\_5p: 5 detected landmarks aligned with cropped_img. 
+	- "xxx_mesh.obj" : 3D face mesh in the world coordinate (best viewed in MeshLab).
+	
 ```
 python demo.py --use_pb 0 --pretrain_weights <custom_weights>.ckpt
 ```
+
 
 ## Note
 
