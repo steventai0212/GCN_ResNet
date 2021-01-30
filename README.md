@@ -77,6 +77,25 @@ tensorboard --logdir=result/<custom_model_name>
 ```
 python demo.py --use_pb 0 --pretrain_weights <custom_weights>.ckpt
 ```
+### Download evaluate data AFLW-2000 ###
+1. Download the evaluate data [image](https://drive.google.com/file/d/1Qy4CRJ42CNvqnLNovJDJubHo32GuqLX7/view?usp=sharing).
+
+2. Download the evaluate data [GT](https://drive.google.com/file/d/1VZhwMyMyAryoN8icaZxKhSxSJTEzCRnb/view?usp=sharing).
+
+3. Test NME
+```
+python nme.py --use_pb 0 --pretrain_weights <custom_weights>.ckpt
+```
+
+### Get renderer result and obj file ###
+1. renderer result
+```
+python renderer.py --use_pb 0 --pretrain_weights <custom_weights>.ckpt
+```
+2. obj file
+```
+python obj.py --use_pb 0 --pretrain_weights <custom_weights>.ckpt
+```
 
 
 ## Note
