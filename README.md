@@ -20,7 +20,8 @@ git clone https://github.com/Microsoft/Deep3DFaceReconstruction
 cd Deep3DFaceReconstruction
 ```
 
-2. Download the Basel Face Model. Due to the license agreement of Basel Face Model, you have to download the BFM09 model after submitting an application on its [home page](https://drive.google.com/file/d/1xNbklNSejHnYDT-w3E9CcHhsY2wo_MiL/view?usp=sharing). After getting the access to BFM data, download "01_MorphableModel.mat" and put it into ./BFM subfolder.
+2. Download the Basel Face Model. Due to the license agreement of Basel Face Model, you have to download the BFM09 model after submitting an application on its. 
+[download link](https://drive.google.com/file/d/1xNbklNSejHnYDT-w3E9CcHhsY2wo_MiL/view?usp=sharing) Download the BFM face model on google drive, and put it into ./BFM subfolder.
 
 3. Download the Expression Basis provided by [Guo et al.](https://github.com/Juyong/3DFace) You can find a link named "CoarseData" in the first row of Introduction part in their repository. Download and unzip the Coarse_Dataset.zip. Put "Exp_Pca.bin" into ./BFM subfolder. The expression basis are constructed using [Facewarehouse](kunzhou.net/zjugaps/facewarehouse/) data and transferred to BFM topology.
 
