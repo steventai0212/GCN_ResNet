@@ -2,7 +2,7 @@
 
 
 ## Getting Started
-### Testing Requirements ###
+### Training Requirements ###
 
 - Reconstructions can be done on both Windows and Linux. However, we suggest running on Linux because the rendering process is only supported on Linux.
 - Python 3.6 (numpy, scipy, pillow, argparse).
@@ -10,19 +10,17 @@
 - [Basel Face Model 2009 (BFM09)](https://faces.dmi.unibas.ch/bfm/main.php?nav=1-0&id=basel_face_model). 
 - [Expression Basis (transferred from Facewarehouse by Guo et al.)](https://github.com/Juyong/3DFace). The original BFM09 model does not handle expression variations so extra expression basis are needed. 
 - [tf mesh renderer](https://github.com/google/tf_mesh_renderer).  We use the library to render reconstruction images. Follow the instruction of tf mesh render to install it using Bazel. Note that the rendering tool can only be used on Linux.
+- Training is only supported on Linux. To train new model from scratch, more requirements are needed on top of the requirements listed in the testing stage.
+- [Facenet](https://github.com/davidsandberg/facenet) provided by 
+Sandberg et al. In our paper, we use a network to exrtact perceptual face features. This network model cannot be publicly released. As an alternative, we recommend using the Facenet from Sandberg et al. This repo uses the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with this model to ensure similar results.
+- [Resnet50-v1](https://github.com/tensorflow/models/blob/master/research/slim/README.md) pre-trained on ImageNet from Tensorflow Slim. We use the version resnet_v1_50_2016_08_28.tar.gz as an initialization of the face reconstruction network.
+- [68-facial-landmark detector](https://drive.google.com/file/d/1KYFeTb963jg0F47sTiwqDdhBIvRlUkPa/view?usp=sharing). We use 68 facial landmarks for loss calculation during training. To make the training process reproducible, we provide a lightweight detector that produce comparable results to [the method of Bulat et al.](https://github.com/1adrianb/2D-and-3D-face-alignment). The detector is trained on [300WLP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm), [LFW](http://vis-www.cs.umass.edu/lfw/), and [LS3D-W](https://www.adrianbulat.com/face-alignment).
 
-### Testing with pre-trained network ###
+### Download requirements face model and pre-trained network ###
 
 1. Download the [BFM face model](https://drive.google.com/file/d/1xNbklNSejHnYDT-w3E9CcHhsY2wo_MiL/view?usp=sharing) on google drive, and put it into ./BFM subfolder.
 
-
-5. Download the pre-trained [reconstruction network](https://drive.google.com/file/d/176LCdUDxAj7T2awQ5knPMPawq5Q2RUWM/view?usp=sharing), unzip it and put "FaceReconModel.pb" into ./network subfolder.
-
-6. Run the demo code.
-
-```
-python demo.py
-```
+2. Download the [pre-trained face net and reconstrucion net](https://drive.google.com/file/d/1hioKD4PTTaC9GgJM1Wg0W0ssG-MnIgz7/view?usp=sharing), unzip it and put into ./network subfolder.
 
 7. ./input subfolder contains several test images and ./output subfolder stores their reconstruction results. For each input test image, two output files can be obtained after running the demo code:
 	- "xxx.mat" : 
@@ -38,11 +36,7 @@ python demo.py
 
 ### Training requirements ###
 
-- Training is only supported on Linux. To train new model from scratch, more requirements are needed on top of the requirements listed in the testing stage.
-- [Facenet](https://github.com/davidsandberg/facenet) provided by 
-Sandberg et al. In our paper, we use a network to exrtact perceptual face features. This network model cannot be publicly released. As an alternative, we recommend using the Facenet from Sandberg et al. This repo uses the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with this model to ensure similar results.
-- [Resnet50-v1](https://github.com/tensorflow/models/blob/master/research/slim/README.md) pre-trained on ImageNet from Tensorflow Slim. We use the version resnet_v1_50_2016_08_28.tar.gz as an initialization of the face reconstruction network.
-- [68-facial-landmark detector](https://drive.google.com/file/d/1KYFeTb963jg0F47sTiwqDdhBIvRlUkPa/view?usp=sharing). We use 68 facial landmarks for loss calculation during training. To make the training process reproducible, we provide a lightweight detector that produce comparable results to [the method of Bulat et al.](https://github.com/1adrianb/2D-and-3D-face-alignment). The detector is trained on [300WLP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm), [LFW](http://vis-www.cs.umass.edu/lfw/), and [LS3D-W](https://www.adrianbulat.com/face-alignment).
+
 
 ### Training preparation ###
 
