@@ -1,4 +1,4 @@
-## Deep3D GCN-ResNet ##
+# Deep3D GCN-ResNet #
 
 
 ## Getting Started
@@ -13,16 +13,8 @@
 
 ### Testing with pre-trained network ###
 
-1. Clone the repository 
+1. Download the [BFM face model](https://drive.google.com/file/d/1xNbklNSejHnYDT-w3E9CcHhsY2wo_MiL/view?usp=sharing) on google drive, and put it into ./BFM subfolder.
 
-```bash
-git clone https://github.com/Microsoft/Deep3DFaceReconstruction
-cd Deep3DFaceReconstruction
-```
-
-2. Download the [BFM face model](https://drive.google.com/file/d/1xNbklNSejHnYDT-w3E9CcHhsY2wo_MiL/view?usp=sharing) on google drive, and put it into ./BFM subfolder.
-
-3. Compile [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer) with Bazel. We recommend using its [older version](https://github.com/google/tf_mesh_renderer/tree/ba27ea1798f6ee8d03ddbc52f42ab4241f9328bb) because we find its latest version unstable during our training process. If the library is compiled correctly, there should be a file named "rasterize_triangles_kernel.so". Put the .so file into ./renderer folder. For convenience, we provide a [pre-compiled file](https://drive.google.com/file/d/1VUtJPdg0UiJkKWxkACs8ZTf5L7Y4P9Wj/view?usp=sharing) of the library under tensorflow 1.12. Download the file and put it in ./renderer.
 
 5. Download the pre-trained [reconstruction network](https://drive.google.com/file/d/176LCdUDxAj7T2awQ5knPMPawq5Q2RUWM/view?usp=sharing), unzip it and put "FaceReconModel.pb" into ./network subfolder.
 
