@@ -1,10 +1,4 @@
-## Accurate 3D Face Reconstruction with Weakly-Supervised Learning: From Single Image to Image Set ##
-
-<p align="center"> 
-<img src="/images/example.gif">
-</p>
-
-
+## Deep3D GCN-ResNet ##
 
 This is a tensorflow implementation of the following paper:
 
