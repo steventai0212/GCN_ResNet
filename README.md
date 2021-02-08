@@ -43,7 +43,7 @@ python preprocess_img.py --img_path <raw_img_path> --save_path <save_path_for_pr
 ```
 
 ### Download pre-processing data celeba ###
-1. Download the pre-processing data for [training](https://drive.google.com/file/d/1ZD_fQzRhfBUholsR0TWa-KqarpYxe2o0/view?usp=sharing).
+1. Download the pre-processing data for [training](https://drive.google.com/file/d/1w62Rtp3R7lqkbGaxjsz8XrOX8UyH0vHj/view?usp=sharing).
 
 2. Download the pre-processing data for [validation](https://drive.google.com/file/d/1s7M1IRoOl8a5ubSbXot-I3EOfkkUT2Uo/view?usp=sharing).
 
